@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Multi-function Web Page</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #1e293b;
+            margin: 0;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: auto;
+            background: #334155;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+
+        h1 {
+            text-align: center;
+        }
+
+        nav {
+            display: flex;
+            background-color: #aeaeae86;
+            padding: 10px;
+            justify-content: space-between;
+        }
+
+        .nav-menu {
+            display: flex;
+            list-style: none;
+            margin: 0;
+            padding: 0;
+        }
+
+        .nav-menu li {
+            margin-right: 20px;
+            color: white;
+            cursor: pointer;
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+            margin-top: 20px;
+        }
+
+        label {
+            margin: 10px 0 5px;
+        }
+
+        input, textarea, button {
+            padding: 10px;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        button {
+            background-color: #00ffeab3;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #ff0000;
+        }
+
+        .grid-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+            gap: 10px;
+            margin-top: 20px;
+        }
+
+        .grid-item {
+            background-color: #00ffeab3;
+            color: white;
+            padding: 20px;
+            text-align: center;
+        }
+
+        .todo-container {
+            margin-top: 20px;
+        }
+
+        #todoInput {
+            width: 70%;
+            padding: 10px;
+        }
+
+        #addTodoButton {
+            padding: 10px;
+        }
+
+        ul {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        @media (max-width: 600px) {
+            .nav-menu {
+                flex-direction: column;
+            }
+            
+            .grid-container {
+                grid-template-columns: 1fr; 
+            }
+
+            #todoInput {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <nav>
+            <ul class="nav-menu">
+                <li>Home</li>
+                <li>About</li>
+                <li>Contact</li>
+            </ul>
+        </nav>
+
+        <h1>Contact Us</h1>
+        <form id="contactForm">
+            <label for="name">Name:</label>
+            <input type="text" id="name" name="name" required>
+
+            <label for="email">Email:</label>
+            <input type="email" id="email" name="email" required>
+
+            <label for="message">Message:</label>
+            <textarea id="message" name="message" required></textarea>
+
+            <button type="submit">Submit</button>
+        </form>
+
+        <h2>FLEXBOX LAYOUT</h2>
+        <section class="grid-container">
+            <div class="grid-item">Item 1</div>
+            <div class="grid-item">Item 2</div>
+            <div class="grid-item">Item 3</div>
+            <div class="grid-item">Item 4</div>
+        </section>
+
+        <div class="todo-container">
+            <h2>To-Do List</h2>
+            <input type="text" id="todoInput" placeholder="Add a new task">
+            <button id="addTodoButton">Add Task</button>
+            <ul id="todoList"></ul>
+        </div>
+    </div>
+
+    <script>
+        // Form Validation
+        document.getElementById('contactForm').addEventListener('submit', function(event) {
+            let isValid = true;
+            const name = document.getElementById('name').value;
+            const email = document.getElementById('email').value;
+
+            if (name.trim() === '') {
+                isValid = false;
+                alert('Name is required.');
+            }
+
+            const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            if (!emailPattern.test(email)) {
+                isValid = false;
+                alert('Please enter a valid email address.');
+            }
+
+            if (!isValid) {
+                event.preventDefault();  // Prevent form submission
+            }
+        });
+
+        // Dynamic To-Do List
+        document.getElementById('addTodoButton').addEventListener('click', function () {
+            const input = document.getElementById('todoInput');
+            const newTask = input.value.trim();
+            
+            if (newTask) {
+                const li = document.createElement('li');
+                li.textContent = newTask;
+                li.addEventListener('click', function () {
+                    this.remove(); // Remove the task when clicked
+                });
+                document.getElementById('todoList').appendChild(li);
+                input.value = ''; // Clear input field
+            } else {
+                alert('Please enter a task.');
+            }
+        });
+    </script>
+</body>
+</html>

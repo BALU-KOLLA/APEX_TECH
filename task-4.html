@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portfolio</title>
+    <style>
+        /* General Reset */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            color: #a97411;
+            background-color: #9f2121;
+            margin: 0;
+        }
+
+        header {
+            background: #333;
+            color: #c11d56;
+            padding: 1rem 0;
+        }
+
+        header nav ul {
+            display: flex;
+            justify-content: center;
+            list-style: none;
+            flex-wrap: wrap;
+        }
+
+        header nav ul li {
+            margin: 0 1rem;
+        }
+
+        header nav ul li a {
+            color: #fff;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        header nav ul li a:hover {
+            text-decoration: underline;
+        }
+
+        main {
+            padding: 2rem;
+        }
+
+        section {
+            margin-bottom: 2rem;
+            padding: 1rem;
+            background: #fff;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        h1, h2, h3 {
+            color: #444;
+        }
+
+        /* Responsive Grid */
+        #product-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+        }
+
+        #todo-app.hidden {
+            display: none;
+        }
+
+        /* Buttons and Inputs */
+        button, input, select, textarea {
+            padding: 0.5rem;
+            border-radius: 4px;
+            border: 1px solid #09c25c;
+            font-size: 1rem;
+            margin-bottom: 1rem;
+        }
+
+        button {
+    cursor: pointer;
+    padding: 10px 20px; 
+    font-size: 16px; 
+    border: 1px solid #8c2506; 
+    border-radius: 5px; 
+    background-color: #c22e3f; 
+    color: #333; 
+    transition: background-color 0.3s ease, transform 0.2s ease; 
+}
+
+button:hover {
+    background-color: #ddd; 
+    transform: scale(1.05); 
+}
+
+button:active {
+    background-color: #bbb;
+    transform: scale(0.95); 
+}
+
+
+        /* Media Queries */
+        @media (max-width: 768px) {
+            header nav ul {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            main {
+                padding: 1rem;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <nav>
+            <ul>
+                <li><a href="#about">About</a></li>
+                <li><a href="#projects">Projects</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <section id="about">
+            <h1>About Me</h1>
+            <p>Welcome to my portfolio! I'm a web developer with a passion for creating interactive web applications.</p>
+        </section>
+
+        <section id="projects">
+            <h1>Projects</h1>
+            <div>
+                <article>
+                    <h2>To-Do List App</h2>
+                    <button id="show-todo">Open To-Do App</button>
+                    <div id="todo-app" class="hidden">
+                        <h3>My To-Do List</h3>
+                        <input type="text" id="todo-input" placeholder="Add a new task">
+                        <button id="add-task">Add</button>
+                        <ul id="todo-list"></ul>
+                    </div>
+                </article>
+
+                <article>
+                    <h2>Product Listing Page</h2>
+                    <div id="product-page">
+                        <div class="filters">
+                            <label for="category">Category:</label>
+                            <select id="category">
+                                <option value="all">All</option>
+                                <option value="electronics">Electronics</option>
+                                <option value="fashion">Fashion</option>
+                            </select>
+
+                            <label for="sort">Sort by:</label>
+                            <select id="sort">
+                                <option value="price">Price</option>
+                                <option value="rating">Rating</option>
+                            </select>
+                        </div>
+
+                        <div id="product-list">
+                            <!-- Dynamic product cards will be inserted here -->
+                        </div>
+                    </div>
+                </article>
+            </div>
+        </section>
+
+        <section id="contact">
+            <h1>Contact</h1>
+            <form id="contact-form">
+                <label for="name">Name:</label>
+                <input type="text" id="name" required>
+
+                <label for="email">Email:</label>
+                <input type="email" id="email" required>
+
+                <label for="message">Message:</label>
+                <textarea id="message" required></textarea>
+
+                <button type="submit">Send</button>
+            </form>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2024 Portfolio Website</p>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // To-Do App Logic
+            const showTodoBtn = document.getElementById('show-todo');
+            const todoApp = document.getElementById('todo-app');
+            const addTaskBtn = document.getElementById('add-task');
+            const todoInput = document.getElementById('todo-input');
+            const todoList = document.getElementById('todo-list');
+
+            showTodoBtn.addEventListener('click', () => {
+                todoApp.classList.toggle('hidden');
+            });
+
+            addTaskBtn.addEventListener('click', () => {
+                const task = todoInput.value.trim();
+                if (task) {
+                    const li = document.createElement('li');
+                    li.textContent = task;
+                    li.addEventListener('click', () => li.remove()); // Remove task on click
+                    todoList.appendChild(li);
+                    todoInput.value = '';
+                }
+            });
+
+            // Product Listing Logic
+            const productData = [
+                { name: 'Smartphone', category: 'electronics', price: 699, rating: 4.5 },
+                { name: 'Jeans', category: 'fashion', price: 49, rating: 4.2 },
+                { name: 'Laptop', category: 'electronics', price: 999, rating: 4.7 },
+                { name: 'T-shirt', category: 'fashion', price: 19, rating: 4.0 },
+            ];
+
+            const categoryFilter = document.getElementById('category');
+            const sortFilter = document.getElementById('sort');
+            const productList = document.getElementById('product-list');
+
+            const renderProducts = () => {
+                productList.innerHTML = '';
+                let filteredProducts = productData.filter(product => 
+                    categoryFilter.value === 'all' || product.category === categoryFilter.value
+                );
+
+                if (sortFilter.value === 'price') {
+                    filteredProducts.sort((a, b) => a.price - b.price);
+                } else if (sortFilter.value === 'rating') {
+                    filteredProducts.sort((a, b) => b.rating - a.rating);
+                }
+
+                filteredProducts.forEach(product => {
+                    const card = document.createElement('div');
+                    card.className = 'product-card';
+                    card.innerHTML = `<h3>${product.name}</h3>
+                                      <p>Price: $${product.price}</p>
+                                      <p>Rating: ${product.rating}⭐</p>`;
+                    productList.appendChild(card);
+                });
+            };
+
+            categoryFilter.addEventListener('change', renderProducts);
+            sortFilter.addEventListener('change', renderProducts);
+
+            renderProducts(); // Initial rendering
+        });
+    </script>
+</body>
+
+</html>

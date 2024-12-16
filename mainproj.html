@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>E-commerce Website</title>
+    <link rel="stylesheet" href="styles.min.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background: linear-gradient(to bottom, #f0f8ff, #e6f7ff);
+            color: #333;
+        }
+
+        header {
+            background-color: #4CAF50;
+            color: white;
+            padding: 1rem 2rem;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: bold;
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .menu {
+            display: flex;
+            gap: 1rem;
+            list-style: none;
+        }
+
+        .menu li a {
+            text-decoration: none;
+            color: white;
+            font-weight: bold;
+            padding: 0.5rem 1rem;
+            border: 2px solid white;
+            border-radius: 5px;
+            transition: background-color 0.3s, color 0.3s;
+        }
+
+        .menu li a:hover {
+            background-color: white;
+            color: #4CAF50;
+        }
+
+        #hero {
+            text-align: center;
+            padding: 2rem;
+            background: linear-gradient(to bottom right, #ffcccb, #ffc107);
+            color: white;
+        }
+
+        #products {
+            padding: 2rem;
+            background-color: #f9f9f9;
+        }
+
+        .product-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .product {
+            background: white;
+            padding: 1rem;
+            border: 2px solid #ddd;
+            border-radius: 10px;
+            text-align: center;
+            transition: box-shadow 0.3s;
+        }
+
+        .product:hover {
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        .product img {
+            width: 100%; /* Set the width to 100% of the product container */
+            height: 200px; /* Set a fixed height */
+            object-fit: cover; /* Maintain aspect ratio and cover the area */
+            border-radius: 10px; /* Optional: add border radius for aesthetics */
+        }
+
+        button {
+            padding: 0.5rem 1rem;
+            border: 2px solid #4CAF50;
+            background-color: #4CAF50;
+            color: white;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s, color 0.3s;
+        }
+
+        button:hover {
+            background-color: white;
+            color: #4CAF50;
+        }
+
+        #contact {
+            padding: 2rem;
+            background: linear-gradient(to bottom, #e0f7fa, #e6f7ff);
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        footer {
+            text-align: center;
+            padding: 1rem;
+            background-color: #333;
+            color: white;
+        }
+
+        @media (max-width: 768px) {
+            .menu {
+                display: none;
+                flex-direction: column;
+                background-color: #4CAF50;
+                position: absolute;
+                top: 60px;
+                right: 0;
+                width: 100%;
+            }
+
+            .menu.active {
+                display: flex;
+            }
+
+            .menu li {
+                text-align: center;
+                padding: 1rem;
+            }
+        }
+
+        .menu-toggle {
+            display: none;
+            cursor: pointer;
+        }
+
+        .menu-toggle span {
+            display: block;
+            width: 25px;
+            height: 3px;
+            background: white;
+            margin: 5px 0;
+        }
+
+        @media (max-width: 768px) {
+            .menu-toggle {
+                display: block;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav>
+            <div class="logo">ROYAL ENFIELD - SINCE 1901            </div>
+            <div class="menu-toggle">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+            <ul class="menu">
+                <li><a href="#">Home</a></li>
+                <li><a href="#products">Products</a></li>
+                <li><a href="#contact">Contact</a></li>
+                <li><a href="#cart">Cart</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <section id="hero">
+            <h1>Welcome to ROYAL ENFIELD ebooking service</h1>
+            <p>Your one-stop shop for amazing two wheelers!</p>
+        </section>
+
+        <section id="products">
+            <h2>FEATURED BIKES</h2>
+            <div class="product-grid">
+                <div class="product" data-id="1">
+                    <img class="lazy" data-src="https://www.carblogindia.com/wp-content/uploads/2018/09/royal-enfield-classic-Signals-350-Airborne-Blue-main.jpg" alt="Product 1">
+                    <h3>CLASSIC 350</h3>
+                    <p>$10999</p>
+                    <button>Add to Cart</button>
+                </div>
+                <div class="product" data-id="2">
+                    <img class="lazy" data-src="https://media.assettype.com/fastbikesindia%2F2021-11%2F8b421cd7-5819-48c9-9d69-c48255ccc1aa%2F8__1_.jpg" alt="Product 2">
+                    <h3>CONTINENTAL GT 650</h3>
+                    <p>$15999</p>
+                    <button>Add to Cart</button>
+                </div>
+                <div class="product" data-id="3">
+                    <img class="lazy" data-src="https://wallpapers.com/images/hd/himalayan-bike-on-wood-bridge-ybv0kgospcdzkm6x.jpg" alt="Product 3">
+                    <h3>HIMALAYAN 450</h3>
+                    <p>$20999</p>
+                    <button>Add to Cart</button>
+                </div>
+                <div class="product" data-id="4">
+                    <img class="lazy" data-src="https://wallpapercave.com/wp/wp11492206.jpg" alt="Product 4">
+                    <h3>HUNTER 350</h3>
+                    <p>$25999</p>
+                    <button>Add to Cart</button>
+                </div>
+                <div class="product" data-id="5">
+                    <img class="lazy" data-src="https://cdni.autocarindia.com/Utils/ImageResizer.ashx?n=https://cdni.autocarindia.com/Galleries/20221108040950_Super%20Meteor%20650%20Interstellar%20Green8.jpg&w=736&h=488&q=75&c=1" alt="Product 5">
+                    <h3>SUPER METEOR 650</h3>
+                    <p>$30999</p>
+                    <button>Add to Cart</button>
+                </div>
+                <div class="product" data-id="6">
+                    <img class="lazy" data-src="https://imgcdn.oto.com/large/gallery/exterior/100/3033/royal-enfield-shotgun-650-slant-rear-view-full-image-562108.jpg" alt="Product 6">
+                    <h3>SHOTGUN 650</h3>
+                    <p>$35999</p>
+                    <button>Add to Cart</button>
+                </div>
+            </div>
+        </section>
+
+        <section id="contact">
+            <h2>Contact Us</h2>
+            <form>
+                <label for="name">Name:</label>
+                <input type="text" id="name" name="name" required>
+                <label for="email">Email:</label>
+                <input type="email" id="email" name="email" required>
+                <label for="message">Message:</label>
+                <textarea id="message" name="message" required></textarea>
+                <button type="submit">Send</button>
+            </form>
+        </section>
+
+        <section id="cart">
+            <h2>Your Cart</h2>
+            <ul id="cart-items">
+                <li>Your cart is empty.</li>
+            </ul>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2024 ROYALENFIELDINIDA. All rights reserved.</p>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Lazy load images
+            const lazyImages = document.querySelectorAll('img.lazy');
+            const observer = new IntersectionObserver((entries, observer) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        const img = entry.target;
+                        img.src = img.dataset.src;
+                        img.classList.remove('lazy');
+                        observer.unobserve(img);
+                    }
+                });
+            });
+            lazyImages.forEach(img => observer.observe(img));
+
+            // Add product to cart functionality
+            const cartItems = document.getElementById('cart-items');
+            const buttons = document.querySelectorAll('.product button');
+            buttons.forEach(button => {
+                button.addEventListener('click', (e) => {
+                    const product = e.target.closest('.product');
+                    const productName = product.querySelector('h3').textContent;
+                    const productPrice = product.querySelector('p').textContent;
+                    const li = document.createElement('li');
+                    li.textContent = `${productName} - ${productPrice}`;
+                    cartItems.appendChild(li);
+                });
+            });
+
+            // Responsive menu toggle
+            const menuToggle = document.querySelector('.menu-toggle');
+            const menu = document.querySelector('.menu');
+            menuToggle.addEventListener('click', () => {
+                menu.classList.toggle('active');
+            });
+        });
+    </script>
+</body>
+</html>
